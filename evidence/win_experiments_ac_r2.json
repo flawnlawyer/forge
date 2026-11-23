@@ -1,0 +1,489 @@
+{
+  "meta": {
+    "version": "forge-m0-0.2",
+    "utc": "2026-11-23T02:44:51.839738+00:00",
+    "argv": [
+      "run_m0.py",
+      "--run-experiments",
+      "--only",
+      "memory_limit",
+      "cpu_time_limit",
+      "supervisor_cpu_limit",
+      "cpu_rate_cap",
+      "--out",
+      "evidence\\win_experiments_ac_r2.json"
+    ],
+    "is_windows": true,
+    "experiments_requested": true,
+    "experiments_selected": [
+      "memory_limit",
+      "cpu_time_limit",
+      "supervisor_cpu_limit",
+      "cpu_rate_cap"
+    ],
+    "trials": 3
+  },
+  "probes": {
+    "environment": {
+      "status": "ok",
+      "value": {
+        "python": "3.13.7 (tags/v3.13.7:bcee1c3, Aug 14 2025, 14:15:11) [MSC v.1944 64 bit (AMD64)]",
+        "implementation": "CPython",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "machine": "AMD64",
+        "pointer_bits": 64,
+        "cwd": "D:\\Projects\\forge_m0",
+        "python_process_in_job": true
+      },
+      "method": "platform/sys; IsProcessInJob on Windows",
+      "note": "If the interpreter already runs inside a job, job-assignment tests may fail."
+    },
+    "clocks": {
+      "status": "ok",
+      "value": {
+        "perf_counter": {
+          "implementation": "QueryPerformanceCounter()",
+          "resolution_s": 1e-07,
+          "monotonic": true,
+          "adjustable": false
+        },
+        "process_time": {
+          "implementation": "GetProcessTimes()",
+          "resolution_s": 1e-07,
+          "monotonic": true,
+          "adjustable": false
+        },
+        "monotonic": {
+          "implementation": "QueryPerformanceCounter()",
+          "resolution_s": 1e-07,
+          "monotonic": true,
+          "adjustable": false
+        },
+        "time": {
+          "implementation": "GetSystemTimePreciseAsFileTime()",
+          "resolution_s": 1e-07,
+          "monotonic": false,
+          "adjustable": true
+        },
+        "process_time_observed_granularity": {
+          "observed_changes": 20,
+          "min_s": 0.015625,
+          "median_s": 0.015625,
+          "max_s": 0.015625
+        }
+      },
+      "method": "time.get_clock_info + empirical process_time step sizes",
+      "note": "Reported resolution is nominal; the observed step size is what limits CPU-seconds accuracy."
+    },
+    "cpu_topology": {
+      "status": "ok",
+      "value": {
+        "os_cpu_count": 12,
+        "platform_processor": "AMD64 Family 25 Model 117 Stepping 2, AuthenticAMD",
+        "active_logical": 12,
+        "physical_cores": 6,
+        "registry_name": "AMD Ryzen 5 8640HS w/ Radeon 760M Graphics",
+        "registry_mhz_nominal": 3493
+      },
+      "method": "GetActiveProcessorCount, GetLogicalProcessorInformationEx, winreg",
+      "note": "Registry MHz is nominal, not current frequency. Hybrid/efficiency-core data is not collected."
+    },
+    "system_memory": {
+      "status": "ok",
+      "value": {
+        "memory_load_pct": 74,
+        "total_phys": 16438382592,
+        "avail_phys": 4229599232,
+        "total_pagefile_raw": 25028317184,
+        "avail_pagefile_raw": 5486428160,
+        "total_virtual_process": 140737488224256,
+        "avail_virtual_process": 140733056057344
+      },
+      "method": "GlobalMemoryStatusEx",
+      "note": "Page-file fields are kept raw: their system-vs-process semantics must be verified."
+    },
+    "self_memory": {
+      "status": "ok",
+      "value": {
+        "working_set": 24104960,
+        "peak_working_set": 24969216,
+        "commit": 12296192,
+        "peak_commit": 12451840,
+        "private_bytes": 12296192,
+        "page_fault_count": 7029,
+        "open_access": "current-process"
+      },
+      "method": "GetProcessMemoryInfo (current process)",
+      "note": "Working set and commit are different quantities and both are recorded."
+    },
+    "power": {
+      "status": "ok",
+      "value": {
+        "system_power_status": {
+          "ac_line_status": "online (AC)",
+          "ac_line_raw": 1,
+          "battery_flag_raw": 1,
+          "battery_percent": 80,
+          "battery_saver_on": false,
+          "battery_seconds_remaining": null
+        },
+        "overlay": {
+          "available": true,
+          "guid": "961cc777-2547-4f9d-8174-7d86181b8a7a",
+          "label_believed": "best power efficiency (believed)"
+        },
+        "powercfg_active_scheme": {
+          "returncode": 0,
+          "raw_output": "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Balanced)",
+          "guid": "381b4222-f694-41f0-9685-ff5bb260df2e"
+        }
+      },
+      "method": "GetSystemPowerStatus, PowerGetEffectiveOverlayScheme, powercfg (external tool)",
+      "note": "Gives AC/battery state and power mode as CONTEXT. None of this measures energy."
+    },
+    "storage": {
+      "status": "ok",
+      "value": {
+        "path": "D:\\",
+        "total": 289913688064,
+        "used": 50203123712,
+        "free": 239710564352
+      },
+      "method": "shutil.disk_usage",
+      "note": "Capacity only. Throughput/latency are not measured in M0."
+    },
+    "cpu_quantities_demo": {
+      "status": "ok",
+      "value": {
+        "stdlib_process_time": {
+          "cpu_seconds": 0.28125,
+          "wall_seconds": 0.4007137999999486,
+          "core_equivalents": 0.7018725085086565,
+          "normalized_pct": 5.848937570905471,
+          "logical_cpus": 12
+        },
+        "getprocesstimes": {
+          "cpu_seconds": 0.28125,
+          "wall_seconds": 0.4007137999999486,
+          "core_equivalents": 0.7018725085086565,
+          "normalized_pct": 5.848937570905471,
+          "logical_cpus": 12
+        },
+        "system_wide_busy_pct": 92.90322580645162
+      },
+      "method": "time.process_time; GetProcessTimes; GetSystemTimes",
+      "note": "A single-threaded spin should show about 1 core-equivalent regardless of logical CPU count."
+    }
+  },
+  "experiments": {
+    "memory_limit": {
+      "status": "ok",
+      "limit_mb": 256,
+      "try_mb": 512,
+      "step_mb": 16,
+      "wall_s": 0.20019219999994675,
+      "exit_code": 0,
+      "child_lines": [
+        "ready",
+        "alloc 16",
+        "alloc 32",
+        "alloc 48",
+        "alloc 64",
+        "alloc 80",
+        "alloc 96",
+        "alloc 112",
+        "alloc 128",
+        "alloc 144",
+        "alloc 160",
+        "alloc 176",
+        "alloc 192",
+        "alloc 208",
+        "alloc 224",
+        "alloc 240",
+        "memoryerror 240"
+      ],
+      "job_accounting": {
+        "user_s": 0.078125,
+        "kernel_s": 0.1875,
+        "total_processes": 1,
+        "active_processes": 0,
+        "terminated_processes": 0,
+        "page_faults": 64582
+      },
+      "job_extended": {
+        "limit_flags": "0x2100",
+        "per_process_user_time_limit_s": 0.0,
+        "per_job_user_time_limit_s": 0.0,
+        "process_memory_limit": 268435456,
+        "peak_process_memory_used": 258129920,
+        "peak_job_memory_used": 258129920
+      },
+      "outcome": "ENFORCED_AS_ALLOCATION_FAILURE (MemoryError inside the child)"
+    },
+    "cpu_time_limit": {
+      "status": "ok",
+      "variants": {
+        "per_process_limit_set_before_assign": {
+          "mode": "before",
+          "limit_cpu_s": 1.0,
+          "child_wall_budget_s": 4.0,
+          "limits_readback": {
+            "limit_flags": "0x2002",
+            "per_process_user_time_limit_s": 1.0,
+            "per_job_user_time_limit_s": 0.0,
+            "process_memory_limit": 0,
+            "peak_process_memory_used": 5804032,
+            "peak_job_memory_used": 5804032
+          },
+          "wall_s": 4.0065845999999965,
+          "exit_code": 0,
+          "child_finished_normally": true,
+          "job_accounting": {
+            "user_s": 3.921875,
+            "kernel_s": 0.046875,
+            "total_processes": 1,
+            "active_processes": 0,
+            "terminated_processes": 0,
+            "page_faults": 2987
+          },
+          "cpu_s_consumed": 3.96875,
+          "outcome": "NOT_ENFORCED (child ran to completion)"
+        },
+        "per_process_limit_set_after_assign": {
+          "mode": "after",
+          "limit_cpu_s": 1.0,
+          "child_wall_budget_s": 4.0,
+          "limits_readback": {
+            "limit_flags": "0x2002",
+            "per_process_user_time_limit_s": 1.0,
+            "per_job_user_time_limit_s": 0.0,
+            "process_memory_limit": 0,
+            "peak_process_memory_used": 5836800,
+            "peak_job_memory_used": 5836800
+          },
+          "wall_s": 2.945479700000078,
+          "exit_code": 3221225540,
+          "child_finished_normally": false,
+          "job_accounting": {
+            "user_s": 2.90625,
+            "kernel_s": 0.046875,
+            "total_processes": 1,
+            "active_processes": 0,
+            "terminated_processes": 1,
+            "page_faults": 2914
+          },
+          "cpu_s_consumed": 2.953125,
+          "outcome": "ENFORCED (stopped before finishing its spin)"
+        },
+        "job_wide_time_limit": {
+          "mode": "job",
+          "limit_cpu_s": 1.0,
+          "child_wall_budget_s": 4.0,
+          "limits_readback": {
+            "limit_flags": "0x2004",
+            "per_process_user_time_limit_s": 0.0,
+            "per_job_user_time_limit_s": 1.0,
+            "process_memory_limit": 0,
+            "peak_process_memory_used": 5828608,
+            "peak_job_memory_used": 5828608
+          },
+          "wall_s": 4.008095900000171,
+          "exit_code": 0,
+          "child_finished_normally": true,
+          "job_accounting": {
+            "user_s": 3.890625,
+            "kernel_s": 0.09375,
+            "total_processes": 1,
+            "active_processes": 0,
+            "terminated_processes": 0,
+            "page_faults": 2993
+          },
+          "cpu_s_consumed": 3.984375,
+          "outcome": "NOT_ENFORCED (child ran to completion)"
+        }
+      },
+      "outcome": "per_process_limit_set_before_assign: NOT_ENFORCED (child ran to completion); per_process_limit_set_after_assign: ENFORCED (stopped before finishing its spin); job_wide_time_limit: NOT_ENFORCED (child ran to completion)"
+    },
+    "supervisor_cpu_limit": {
+      "status": "ok",
+      "limit_cpu_s": 1.0,
+      "poll_ms": 20,
+      "wall_s_at_stop": 0.982325899999978,
+      "polls": 49,
+      "stopped_by_supervisor": true,
+      "exit_code": 1,
+      "child_finished_normally": false,
+      "cpu_s_final": 1.0,
+      "overshoot_s": 0.0,
+      "job_accounting": {
+        "user_s": 0.953125,
+        "kernel_s": 0.046875,
+        "total_processes": 1,
+        "active_processes": 0,
+        "terminated_processes": 0,
+        "page_faults": 2919
+      },
+      "outcome": "SUPERVISOR_STOPPED (overshoot_s shows the cost of polling and tick granularity)"
+    },
+    "cpu_rate_cap": {
+      "status": "ok",
+      "logical_cpus": 12,
+      "run_s": 5.0,
+      "trials": 3,
+      "control": {
+        "cpu_seconds": 4.828125,
+        "wall_s": 5.027920699999868,
+        "core_equivalents_overall": 0.960262758320776,
+        "poll_ms": 100,
+        "windows_100ms": {
+          "n": 50,
+          "min": 0.15519174747408776,
+          "median": 0.9333085941682814,
+          "max": 1.7157474419759304
+        },
+        "windows_500ms": {
+          "n": 10,
+          "min": 0.8359363358813621,
+          "median": 0.9791215892681422,
+          "max": 1.1195264114690682
+        },
+        "note": "wall includes up to one poll interval after exit; window stats are noisy at 100 ms because accounting advances in 15.625 ms ticks"
+      },
+      "targets": {
+        "0.25": {
+          "trials": [
+            {
+              "cpu_seconds": 1.46875,
+              "wall_s": 5.036507099999881,
+              "core_equivalents_overall": 0.29162075439147794,
+              "poll_ms": 100,
+              "windows_100ms": {
+                "n": 50,
+                "min": 0.0,
+                "median": 0.0,
+                "max": 1.2468529431708772
+              },
+              "windows_500ms": {
+                "n": 10,
+                "min": 0.12391566359415487,
+                "median": 0.28001650964334057,
+                "max": 0.5807571841252757
+              },
+              "note": "wall includes up to one poll interval after exit; window stats are noisy at 100 ms because accounting advances in 15.625 ms ticks",
+              "cpu_rate_value_set": 208
+            },
+            {
+              "cpu_seconds": 1.421875,
+              "wall_s": 5.1276309999998375,
+              "core_equivalents_overall": 0.2772966697486705,
+              "poll_ms": 100,
+              "windows_100ms": {
+                "n": 51,
+                "min": 0.0,
+                "median": 0.0,
+                "max": 1.2478561830774946
+              },
+              "windows_500ms": {
+                "n": 10,
+                "min": 0.0931150484844106,
+                "median": 0.29511218258309657,
+                "max": 0.5880840454556374
+              },
+              "note": "wall includes up to one poll interval after exit; window stats are noisy at 100 ms because accounting advances in 15.625 ms ticks",
+              "cpu_rate_value_set": 208
+            },
+            {
+              "cpu_seconds": 1.4375,
+              "wall_s": 5.327720900000031,
+              "core_equivalents_overall": 0.2698151849508467,
+              "poll_ms": 100,
+              "windows_100ms": {
+                "n": 53,
+                "min": 0.0,
+                "median": 0.0,
+                "max": 1.4022759499566968
+              },
+              "windows_500ms": {
+                "n": 10,
+                "min": 0.09232370947704661,
+                "median": 0.2957671900054286,
+                "max": 0.4045982680306772
+              },
+              "note": "wall includes up to one poll interval after exit; window stats are noisy at 100 ms because accounting advances in 15.625 ms ticks",
+              "cpu_rate_value_set": 208
+            }
+          ],
+          "mean_core_equivalents": 0.27957753636366506,
+          "deviation_pct_from_target": 11.831014545466022
+        },
+        "0.5": {
+          "trials": [
+            {
+              "cpu_seconds": 2.734375,
+              "wall_s": 5.345533700000033,
+              "core_equivalents_overall": 0.5115251635210873,
+              "poll_ms": 100,
+              "windows_100ms": {
+                "n": 53,
+                "min": 0.0,
+                "median": 0.4677536846519733,
+                "max": 1.3996018910182184
+              },
+              "windows_500ms": {
+                "n": 10,
+                "min": 0.341988417660684,
+                "median": 0.572427484079421,
+                "max": 0.684041214005618
+              },
+              "note": "wall includes up to one poll interval after exit; window stats are noisy at 100 ms because accounting advances in 15.625 ms ticks",
+              "cpu_rate_value_set": 417
+            },
+            {
+              "cpu_seconds": 2.71875,
+              "wall_s": 5.244228600000042,
+              "core_equivalents_overall": 0.5184270571271393,
+              "poll_ms": 100,
+              "windows_100ms": {
+                "n": 52,
+                "min": 0.0,
+                "median": 0.5450248743939742,
+                "max": 1.3998791499903147
+              },
+              "windows_500ms": {
+                "n": 10,
+                "min": 0.4048050887164033,
+                "median": 0.5250022362740168,
+                "max": 0.7776541273151788
+              },
+              "note": "wall includes up to one poll interval after exit; window stats are noisy at 100 ms because accounting advances in 15.625 ms ticks",
+              "cpu_rate_value_set": 417
+            },
+            {
+              "cpu_seconds": 2.703125,
+              "wall_s": 5.330361499999981,
+              "core_equivalents_overall": 0.507118513444165,
+              "poll_ms": 100,
+              "windows_100ms": {
+                "n": 53,
+                "min": 0.0,
+                "median": 0.46801615067610286,
+                "max": 1.0891602785864805
+              },
+              "windows_500ms": {
+                "n": 10,
+                "min": 0.4052609201982563,
+                "median": 0.5286725852485296,
+                "max": 0.622708308881677
+              },
+              "note": "wall includes up to one poll interval after exit; window stats are noisy at 100 ms because accounting advances in 15.625 ms ticks",
+              "cpu_rate_value_set": 417
+            }
+          ],
+          "mean_core_equivalents": 0.5123569113641305,
+          "deviation_pct_from_target": 2.471382272826106
+        }
+      },
+      "outcome": "CAP_HELD_ON_AVERAGE_WITHIN_25PCT (single-thread child; short-window behavior not established)"
+    }
+  }
+}

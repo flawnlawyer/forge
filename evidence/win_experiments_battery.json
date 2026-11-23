@@ -1,0 +1,1229 @@
+{
+  "meta": {
+    "version": "forge-m0-0.2",
+    "utc": "2026-11-23T02:47:02.052462+00:00",
+    "argv": [
+      "run_m0.py",
+      "--run-experiments",
+      "--trials",
+      "3",
+      "--out",
+      "evidence\\win_experiments_battery.json"
+    ],
+    "is_windows": true,
+    "experiments_requested": true,
+    "experiments_selected": [
+      "polling_miss",
+      "memory_limit",
+      "cpu_time_limit",
+      "supervisor_cpu_limit",
+      "cpu_rate_cap"
+    ],
+    "trials": 3
+  },
+  "probes": {
+    "environment": {
+      "status": "ok",
+      "value": {
+        "python": "3.13.7 (tags/v3.13.7:bcee1c3, Aug 14 2025, 14:15:11) [MSC v.1944 64 bit (AMD64)]",
+        "implementation": "CPython",
+        "platform": "Windows-11-10.0.26300-SP0",
+        "machine": "AMD64",
+        "pointer_bits": 64,
+        "cwd": "D:\\Projects\\forge_m0",
+        "python_process_in_job": true
+      },
+      "method": "platform/sys; IsProcessInJob on Windows",
+      "note": "If the interpreter already runs inside a job, job-assignment tests may fail."
+    },
+    "clocks": {
+      "status": "ok",
+      "value": {
+        "perf_counter": {
+          "implementation": "QueryPerformanceCounter()",
+          "resolution_s": 1e-07,
+          "monotonic": true,
+          "adjustable": false
+        },
+        "process_time": {
+          "implementation": "GetProcessTimes()",
+          "resolution_s": 1e-07,
+          "monotonic": true,
+          "adjustable": false
+        },
+        "monotonic": {
+          "implementation": "QueryPerformanceCounter()",
+          "resolution_s": 1e-07,
+          "monotonic": true,
+          "adjustable": false
+        },
+        "time": {
+          "implementation": "GetSystemTimePreciseAsFileTime()",
+          "resolution_s": 1e-07,
+          "monotonic": false,
+          "adjustable": true
+        },
+        "process_time_observed_granularity": {
+          "observed_changes": 20,
+          "min_s": 0.015625,
+          "median_s": 0.015625,
+          "max_s": 0.015625
+        }
+      },
+      "method": "time.get_clock_info + empirical process_time step sizes",
+      "note": "Reported resolution is nominal; the observed step size is what limits CPU-seconds accuracy."
+    },
+    "cpu_topology": {
+      "status": "ok",
+      "value": {
+        "os_cpu_count": 12,
+        "platform_processor": "AMD64 Family 25 Model 117 Stepping 2, AuthenticAMD",
+        "active_logical": 12,
+        "physical_cores": 6,
+        "registry_name": "AMD Ryzen 5 8640HS w/ Radeon 760M Graphics",
+        "registry_mhz_nominal": 3493
+      },
+      "method": "GetActiveProcessorCount, GetLogicalProcessorInformationEx, winreg",
+      "note": "Registry MHz is nominal, not current frequency. Hybrid/efficiency-core data is not collected."
+    },
+    "system_memory": {
+      "status": "ok",
+      "value": {
+        "memory_load_pct": 72,
+        "total_phys": 16438382592,
+        "avail_phys": 4460843008,
+        "total_pagefile_raw": 25028317184,
+        "avail_pagefile_raw": 5763592192,
+        "total_virtual_process": 140737488224256,
+        "avail_virtual_process": 140733056057344
+      },
+      "method": "GlobalMemoryStatusEx",
+      "note": "Page-file fields are kept raw: their system-vs-process semantics must be verified."
+    },
+    "self_memory": {
+      "status": "ok",
+      "value": {
+        "working_set": 24223744,
+        "peak_working_set": 25088000,
+        "commit": 12447744,
+        "peak_commit": 12603392,
+        "private_bytes": 12447744,
+        "page_fault_count": 7047,
+        "open_access": "current-process"
+      },
+      "method": "GetProcessMemoryInfo (current process)",
+      "note": "Working set and commit are different quantities and both are recorded."
+    },
+    "power": {
+      "status": "ok",
+      "value": {
+        "system_power_status": {
+          "ac_line_status": "online (AC)",
+          "ac_line_raw": 1,
+          "battery_flag_raw": 1,
+          "battery_percent": 80,
+          "battery_saver_on": false,
+          "battery_seconds_remaining": null
+        },
+        "overlay": {
+          "available": true,
+          "guid": "961cc777-2547-4f9d-8174-7d86181b8a7a",
+          "label_believed": "best power efficiency (believed)"
+        },
+        "powercfg_active_scheme": {
+          "returncode": 0,
+          "raw_output": "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Balanced)",
+          "guid": "381b4222-f694-41f0-9685-ff5bb260df2e"
+        }
+      },
+      "method": "GetSystemPowerStatus, PowerGetEffectiveOverlayScheme, powercfg (external tool)",
+      "note": "Gives AC/battery state and power mode as CONTEXT. None of this measures energy."
+    },
+    "storage": {
+      "status": "ok",
+      "value": {
+        "path": "D:\\",
+        "total": 289913688064,
+        "used": 50203144192,
+        "free": 239710543872
+      },
+      "method": "shutil.disk_usage",
+      "note": "Capacity only. Throughput/latency are not measured in M0."
+    },
+    "cpu_quantities_demo": {
+      "status": "ok",
+      "value": {
+        "stdlib_process_time": {
+          "cpu_seconds": 0.359375,
+          "wall_seconds": 0.4000075999999808,
+          "core_equivalents": 0.8984204300118729,
+          "normalized_pct": 7.486836916765608,
+          "logical_cpus": 12
+        },
+        "getprocesstimes": {
+          "cpu_seconds": 0.359375,
+          "wall_seconds": 0.4000075999999808,
+          "core_equivalents": 0.8984204300118729,
+          "normalized_pct": 7.486836916765608,
+          "logical_cpus": 12
+        },
+        "system_wide_busy_pct": 43.31210191082803
+      },
+      "method": "time.process_time; GetProcessTimes; GetSystemTimes",
+      "note": "A single-threaded spin should show about 1 core-equivalent regardless of logical CPU count."
+    }
+  },
+  "experiments": {
+    "polling_miss": {
+      "status": "ok",
+      "reader_method": "GetProcessMemoryInfo(WorkingSetSize, PeakWorkingSetSize)",
+      "is_windows_evidence": true,
+      "trials_per_cell": 3,
+      "summary": [
+        {
+          "hold_ms": 5,
+          "interval_ms": 10,
+          "trials": 3,
+          "captured_min": 0.9984188025845745,
+          "captured_mean": 0.9994729341948582,
+          "captured_max": 1.0,
+          "full_captures": 3,
+          "near_total_misses": 0
+        },
+        {
+          "hold_ms": 5,
+          "interval_ms": 50,
+          "trials": 3,
+          "captured_min": 0.0005661077166338064,
+          "captured_mean": 0.000579117749508298,
+          "captured_max": 0.0006051378152572811,
+          "full_captures": 0,
+          "near_total_misses": 3
+        },
+        {
+          "hold_ms": 5,
+          "interval_ms": 250,
+          "trials": 3,
+          "captured_min": 0.0005856286723797997,
+          "captured_mean": 0.0005856286723797997,
+          "captured_max": 0.0005856286723797997,
+          "full_captures": 0,
+          "near_total_misses": 3
+        },
+        {
+          "hold_ms": 20,
+          "interval_ms": 10,
+          "trials": 3,
+          "captured_min": 1.0,
+          "captured_mean": 1.0,
+          "captured_max": 1.0,
+          "full_captures": 3,
+          "near_total_misses": 0
+        },
+        {
+          "hold_ms": 20,
+          "interval_ms": 50,
+          "trials": 3,
+          "captured_min": 0.5010736316077146,
+          "captured_mean": 0.6112889617218029,
+          "captured_max": 0.7767973920003123,
+          "full_captures": 0,
+          "near_total_misses": 0
+        },
+        {
+          "hold_ms": 20,
+          "interval_ms": 250,
+          "trials": 3,
+          "captured_min": 0.0005661077166338064,
+          "captured_mean": 0.0005726147018824708,
+          "captured_max": 0.0005856286723797997,
+          "full_captures": 0,
+          "near_total_misses": 3
+        },
+        {
+          "hold_ms": 100,
+          "interval_ms": 10,
+          "trials": 3,
+          "captured_min": 1.0,
+          "captured_mean": 1.0,
+          "captured_max": 1.0,
+          "full_captures": 3,
+          "near_total_misses": 0
+        },
+        {
+          "hold_ms": 100,
+          "interval_ms": 50,
+          "trials": 3,
+          "captured_min": 1.0,
+          "captured_mean": 1.0,
+          "captured_max": 1.0,
+          "full_captures": 3,
+          "near_total_misses": 0
+        },
+        {
+          "hold_ms": 100,
+          "interval_ms": 250,
+          "trials": 3,
+          "captured_min": 0.0005856286723797997,
+          "captured_mean": 0.0005921317200056268,
+          "captured_max": 0.0006051378152572811,
+          "full_captures": 0,
+          "near_total_misses": 3
+        },
+        {
+          "hold_ms": 500,
+          "interval_ms": 10,
+          "trials": 3,
+          "captured_min": 1.0,
+          "captured_mean": 1.0,
+          "captured_max": 1.0,
+          "full_captures": 3,
+          "near_total_misses": 0
+        },
+        {
+          "hold_ms": 500,
+          "interval_ms": 50,
+          "trials": 3,
+          "captured_min": 1.0,
+          "captured_mean": 1.0,
+          "captured_max": 1.0,
+          "full_captures": 3,
+          "near_total_misses": 0
+        },
+        {
+          "hold_ms": 500,
+          "interval_ms": 250,
+          "trials": 3,
+          "captured_min": 1.0,
+          "captured_mean": 1.0,
+          "captured_max": 1.0,
+          "full_captures": 3,
+          "near_total_misses": 0
+        }
+      ],
+      "rows": [
+        {
+          "spike_mb": 200,
+          "hold_ms": 5,
+          "interval_ms": 10,
+          "polls": 6,
+          "actual_gap_ms_mean": 10.45841999998629,
+          "actual_gap_ms_max": 10.639500000024782,
+          "spike_alloc_s": 0.0325,
+          "spike_total_s": 0.0496,
+          "baseline_bytes": 11685888,
+          "polled_max_bytes": 221179904,
+          "kernel_peak_bytes": 221511680,
+          "polled_delta_mb": 199.7890625,
+          "kernel_delta_mb": 200.10546875,
+          "captured_fraction": 0.9984188025845745,
+          "trial": 0
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 5,
+          "interval_ms": 10,
+          "polls": 6,
+          "actual_gap_ms_mean": 10.376059999998688,
+          "actual_gap_ms_max": 10.505200000125114,
+          "spike_alloc_s": 0.027,
+          "spike_total_s": 0.0423,
+          "baseline_bytes": 11698176,
+          "polled_max_bytes": 221523968,
+          "kernel_peak_bytes": 221523968,
+          "polled_delta_mb": 200.10546875,
+          "kernel_delta_mb": 200.10546875,
+          "captured_fraction": 1.0,
+          "trial": 1
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 5,
+          "interval_ms": 10,
+          "polls": 6,
+          "actual_gap_ms_mean": 10.47510000003058,
+          "actual_gap_ms_max": 10.696800000005169,
+          "spike_alloc_s": 0.0327,
+          "spike_total_s": 0.0507,
+          "baseline_bytes": 11673600,
+          "polled_max_bytes": 221499392,
+          "kernel_peak_bytes": 221499392,
+          "polled_delta_mb": 200.10546875,
+          "kernel_delta_mb": 200.10546875,
+          "captured_fraction": 1.0,
+          "trial": 2
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 5,
+          "interval_ms": 50,
+          "polls": 2,
+          "actual_gap_ms_mean": 50.06069999990359,
+          "actual_gap_ms_max": 50.06069999990359,
+          "spike_alloc_s": 0.0285,
+          "spike_total_s": 0.0431,
+          "baseline_bytes": 11677696,
+          "polled_max_bytes": 11804672,
+          "kernel_peak_bytes": 221507584,
+          "polled_delta_mb": 0.12109375,
+          "kernel_delta_mb": 200.109375,
+          "captured_fraction": 0.0006051378152572811,
+          "trial": 0
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 5,
+          "interval_ms": 50,
+          "polls": 2,
+          "actual_gap_ms_mean": 50.549600000067585,
+          "actual_gap_ms_max": 50.549600000067585,
+          "spike_alloc_s": 0.0271,
+          "spike_total_s": 0.0406,
+          "baseline_bytes": 11689984,
+          "polled_max_bytes": 11808768,
+          "kernel_peak_bytes": 221515776,
+          "polled_delta_mb": 0.11328125,
+          "kernel_delta_mb": 200.10546875,
+          "captured_fraction": 0.0005661077166338064,
+          "trial": 1
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 5,
+          "interval_ms": 50,
+          "polls": 2,
+          "actual_gap_ms_mean": 50.29100000001563,
+          "actual_gap_ms_max": 50.29100000001563,
+          "spike_alloc_s": 0.0268,
+          "spike_total_s": 0.0404,
+          "baseline_bytes": 11665408,
+          "polled_max_bytes": 11784192,
+          "kernel_peak_bytes": 221491200,
+          "polled_delta_mb": 0.11328125,
+          "kernel_delta_mb": 200.10546875,
+          "captured_fraction": 0.0005661077166338064,
+          "trial": 2
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 5,
+          "interval_ms": 250,
+          "polls": 2,
+          "actual_gap_ms_mean": 250.2563000000464,
+          "actual_gap_ms_max": 250.2563000000464,
+          "spike_alloc_s": 0.0267,
+          "spike_total_s": 0.0425,
+          "baseline_bytes": 11677696,
+          "polled_max_bytes": 11800576,
+          "kernel_peak_bytes": 221503488,
+          "polled_delta_mb": 0.1171875,
+          "kernel_delta_mb": 200.10546875,
+          "captured_fraction": 0.0005856286723797997,
+          "trial": 0
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 5,
+          "interval_ms": 250,
+          "polls": 2,
+          "actual_gap_ms_mean": 251.04209999994964,
+          "actual_gap_ms_max": 251.04209999994964,
+          "spike_alloc_s": 0.025,
+          "spike_total_s": 0.0392,
+          "baseline_bytes": 11669504,
+          "polled_max_bytes": 11792384,
+          "kernel_peak_bytes": 221495296,
+          "polled_delta_mb": 0.1171875,
+          "kernel_delta_mb": 200.10546875,
+          "captured_fraction": 0.0005856286723797997,
+          "trial": 1
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 5,
+          "interval_ms": 250,
+          "polls": 2,
+          "actual_gap_ms_mean": 250.06419999999707,
+          "actual_gap_ms_max": 250.06419999999707,
+          "spike_alloc_s": 0.0266,
+          "spike_total_s": 0.0407,
+          "baseline_bytes": 11665408,
+          "polled_max_bytes": 11788288,
+          "kernel_peak_bytes": 221491200,
+          "polled_delta_mb": 0.1171875,
+          "kernel_delta_mb": 200.10546875,
+          "captured_fraction": 0.0005856286723797997,
+          "trial": 2
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 20,
+          "interval_ms": 10,
+          "polls": 7,
+          "actual_gap_ms_mean": 10.455633333360007,
+          "actual_gap_ms_max": 10.580200000049444,
+          "spike_alloc_s": 0.028,
+          "spike_total_s": 0.0564,
+          "baseline_bytes": 11649024,
+          "polled_max_bytes": 221474816,
+          "kernel_peak_bytes": 221474816,
+          "polled_delta_mb": 200.10546875,
+          "kernel_delta_mb": 200.10546875,
+          "captured_fraction": 1.0,
+          "trial": 0
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 20,
+          "interval_ms": 10,
+          "polls": 7,
+          "actual_gap_ms_mean": 10.38768333334398,
+          "actual_gap_ms_max": 10.581099999853905,
+          "spike_alloc_s": 0.0284,
+          "spike_total_s": 0.0579,
+          "baseline_bytes": 11710464,
+          "polled_max_bytes": 221536256,
+          "kernel_peak_bytes": 221536256,
+          "polled_delta_mb": 200.10546875,
+          "kernel_delta_mb": 200.10546875,
+          "captured_fraction": 1.0,
+          "trial": 1
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 20,
+          "interval_ms": 10,
+          "polls": 7,
+          "actual_gap_ms_mean": 10.298049999998208,
+          "actual_gap_ms_max": 10.512099999914426,
+          "spike_alloc_s": 0.028,
+          "spike_total_s": 0.058,
+          "baseline_bytes": 11649024,
+          "polled_max_bytes": 221470720,
+          "kernel_peak_bytes": 221470720,
+          "polled_delta_mb": 200.1015625,
+          "kernel_delta_mb": 200.1015625,
+          "captured_fraction": 1.0,
+          "trial": 2
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 20,
+          "interval_ms": 50,
+          "polls": 3,
+          "actual_gap_ms_mean": 50.3552000000127,
+          "actual_gap_ms_max": 50.36249999989195,
+          "spike_alloc_s": 0.0277,
+          "spike_total_s": 0.056,
+          "baseline_bytes": 11685888,
+          "polled_max_bytes": 174678016,
+          "kernel_peak_bytes": 221511680,
+          "polled_delta_mb": 155.44140625,
+          "kernel_delta_mb": 200.10546875,
+          "captured_fraction": 0.7767973920003123,
+          "trial": 0
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 20,
+          "interval_ms": 50,
+          "polls": 3,
+          "actual_gap_ms_mean": 50.54140000004281,
+          "actual_gap_ms_max": 50.79060000002755,
+          "spike_alloc_s": 0.0262,
+          "spike_total_s": 0.0559,
+          "baseline_bytes": 11681792,
+          "polled_max_bytes": 128344064,
+          "kernel_peak_bytes": 221507584,
+          "polled_delta_mb": 111.2578125,
+          "kernel_delta_mb": 200.10546875,
+          "captured_fraction": 0.5559958615573819,
+          "trial": 1
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 20,
+          "interval_ms": 50,
+          "polls": 3,
+          "actual_gap_ms_mean": 50.49750000000586,
+          "actual_gap_ms_max": 50.66369999985909,
+          "spike_alloc_s": 0.0257,
+          "spike_total_s": 0.0539,
+          "baseline_bytes": 11694080,
+          "polled_max_bytes": 116834304,
+          "kernel_peak_bytes": 221523968,
+          "polled_delta_mb": 100.26953125,
+          "kernel_delta_mb": 200.109375,
+          "captured_fraction": 0.5010736316077146,
+          "trial": 2
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 20,
+          "interval_ms": 250,
+          "polls": 2,
+          "actual_gap_ms_mean": 250.2475000001141,
+          "actual_gap_ms_max": 250.2475000001141,
+          "spike_alloc_s": 0.0397,
+          "spike_total_s": 0.0751,
+          "baseline_bytes": 11665408,
+          "polled_max_bytes": 11788288,
+          "kernel_peak_bytes": 221491200,
+          "polled_delta_mb": 0.1171875,
+          "kernel_delta_mb": 200.10546875,
+          "captured_fraction": 0.0005856286723797997,
+          "trial": 0
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 20,
+          "interval_ms": 250,
+          "polls": 2,
+          "actual_gap_ms_mean": 250.31810000018595,
+          "actual_gap_ms_max": 250.31810000018595,
+          "spike_alloc_s": 0.0363,
+          "spike_total_s": 0.0658,
+          "baseline_bytes": 11669504,
+          "polled_max_bytes": 11788288,
+          "kernel_peak_bytes": 221495296,
+          "polled_delta_mb": 0.11328125,
+          "kernel_delta_mb": 200.10546875,
+          "captured_fraction": 0.0005661077166338064,
+          "trial": 1
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 20,
+          "interval_ms": 250,
+          "polls": 2,
+          "actual_gap_ms_mean": 250.69060000009813,
+          "actual_gap_ms_max": 250.69060000009813,
+          "spike_alloc_s": 0.0387,
+          "spike_total_s": 0.0697,
+          "baseline_bytes": 11653120,
+          "polled_max_bytes": 11771904,
+          "kernel_peak_bytes": 221478912,
+          "polled_delta_mb": 0.11328125,
+          "kernel_delta_mb": 200.10546875,
+          "captured_fraction": 0.0005661077166338064,
+          "trial": 2
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 100,
+          "interval_ms": 10,
+          "polls": 18,
+          "actual_gap_ms_mean": 10.550311764705732,
+          "actual_gap_ms_max": 11.241700000027777,
+          "spike_alloc_s": 0.0515,
+          "spike_total_s": 0.173,
+          "baseline_bytes": 11685888,
+          "polled_max_bytes": 221511680,
+          "kernel_peak_bytes": 221511680,
+          "polled_delta_mb": 200.10546875,
+          "kernel_delta_mb": 200.10546875,
+          "captured_fraction": 1.0,
+          "trial": 0
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 100,
+          "interval_ms": 10,
+          "polls": 18,
+          "actual_gap_ms_mean": 10.57252352941706,
+          "actual_gap_ms_max": 11.651099999880898,
+          "spike_alloc_s": 0.0552,
+          "spike_total_s": 0.1693,
+          "baseline_bytes": 11677696,
+          "polled_max_bytes": 221503488,
+          "kernel_peak_bytes": 221503488,
+          "polled_delta_mb": 200.10546875,
+          "kernel_delta_mb": 200.10546875,
+          "captured_fraction": 1.0,
+          "trial": 1
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 100,
+          "interval_ms": 10,
+          "polls": 17,
+          "actual_gap_ms_mean": 10.520612500002358,
+          "actual_gap_ms_max": 10.898499999939304,
+          "spike_alloc_s": 0.0463,
+          "spike_total_s": 0.1598,
+          "baseline_bytes": 11657216,
+          "polled_max_bytes": 221483008,
+          "kernel_peak_bytes": 221483008,
+          "polled_delta_mb": 200.10546875,
+          "kernel_delta_mb": 200.10546875,
+          "captured_fraction": 1.0,
+          "trial": 2
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 100,
+          "interval_ms": 50,
+          "polls": 5,
+          "actual_gap_ms_mean": 50.51654999999755,
+          "actual_gap_ms_max": 50.54429999995591,
+          "spike_alloc_s": 0.0412,
+          "spike_total_s": 0.1517,
+          "baseline_bytes": 11677696,
+          "polled_max_bytes": 221503488,
+          "kernel_peak_bytes": 221503488,
+          "polled_delta_mb": 200.10546875,
+          "kernel_delta_mb": 200.10546875,
+          "captured_fraction": 1.0,
+          "trial": 0
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 100,
+          "interval_ms": 50,
+          "polls": 5,
+          "actual_gap_ms_mean": 50.44865000002119,
+          "actual_gap_ms_max": 50.6275000000187,
+          "spike_alloc_s": 0.0421,
+          "spike_total_s": 0.1542,
+          "baseline_bytes": 11657216,
+          "polled_max_bytes": 221483008,
+          "kernel_peak_bytes": 221483008,
+          "polled_delta_mb": 200.10546875,
+          "kernel_delta_mb": 200.10546875,
+          "captured_fraction": 1.0,
+          "trial": 1
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 100,
+          "interval_ms": 50,
+          "polls": 4,
+          "actual_gap_ms_mean": 50.563833333323295,
+          "actual_gap_ms_max": 51.090700000031575,
+          "spike_alloc_s": 0.0353,
+          "spike_total_s": 0.1478,
+          "baseline_bytes": 11649024,
+          "polled_max_bytes": 221474816,
+          "kernel_peak_bytes": 221474816,
+          "polled_delta_mb": 200.10546875,
+          "kernel_delta_mb": 200.10546875,
+          "captured_fraction": 1.0,
+          "trial": 2
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 100,
+          "interval_ms": 250,
+          "polls": 2,
+          "actual_gap_ms_mean": 250.44649999995272,
+          "actual_gap_ms_max": 250.44649999995272,
+          "spike_alloc_s": 0.0379,
+          "spike_total_s": 0.1494,
+          "baseline_bytes": 11640832,
+          "polled_max_bytes": 11763712,
+          "kernel_peak_bytes": 221466624,
+          "polled_delta_mb": 0.1171875,
+          "kernel_delta_mb": 200.10546875,
+          "captured_fraction": 0.0005856286723797997,
+          "trial": 0
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 100,
+          "interval_ms": 250,
+          "polls": 2,
+          "actual_gap_ms_mean": 250.4374000000098,
+          "actual_gap_ms_max": 250.4374000000098,
+          "spike_alloc_s": 0.0289,
+          "spike_total_s": 0.1376,
+          "baseline_bytes": 11677696,
+          "polled_max_bytes": 11800576,
+          "kernel_peak_bytes": 221503488,
+          "polled_delta_mb": 0.1171875,
+          "kernel_delta_mb": 200.10546875,
+          "captured_fraction": 0.0005856286723797997,
+          "trial": 1
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 100,
+          "interval_ms": 250,
+          "polls": 2,
+          "actual_gap_ms_mean": 250.44819999993706,
+          "actual_gap_ms_max": 250.44819999993706,
+          "spike_alloc_s": 0.0304,
+          "spike_total_s": 0.1439,
+          "baseline_bytes": 11689984,
+          "polled_max_bytes": 11816960,
+          "kernel_peak_bytes": 221519872,
+          "polled_delta_mb": 0.12109375,
+          "kernel_delta_mb": 200.109375,
+          "captured_fraction": 0.0006051378152572811,
+          "trial": 2
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 500,
+          "interval_ms": 10,
+          "polls": 53,
+          "actual_gap_ms_mean": 10.48560961538232,
+          "actual_gap_ms_max": 10.900999999876149,
+          "spike_alloc_s": 0.0271,
+          "spike_total_s": 0.5357,
+          "baseline_bytes": 11694080,
+          "polled_max_bytes": 221515776,
+          "kernel_peak_bytes": 221515776,
+          "polled_delta_mb": 200.1015625,
+          "kernel_delta_mb": 200.1015625,
+          "captured_fraction": 1.0,
+          "trial": 0
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 500,
+          "interval_ms": 10,
+          "polls": 53,
+          "actual_gap_ms_mean": 10.485888461538742,
+          "actual_gap_ms_max": 11.037400000077469,
+          "spike_alloc_s": 0.0267,
+          "spike_total_s": 0.5363,
+          "baseline_bytes": 11698176,
+          "polled_max_bytes": 221523968,
+          "kernel_peak_bytes": 221523968,
+          "polled_delta_mb": 200.10546875,
+          "kernel_delta_mb": 200.10546875,
+          "captured_fraction": 1.0,
+          "trial": 1
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 500,
+          "interval_ms": 10,
+          "polls": 52,
+          "actual_gap_ms_mean": 10.761713725492418,
+          "actual_gap_ms_max": 12.832600000137973,
+          "spike_alloc_s": 0.0262,
+          "spike_total_s": 0.5377,
+          "baseline_bytes": 11640832,
+          "polled_max_bytes": 221466624,
+          "kernel_peak_bytes": 221466624,
+          "polled_delta_mb": 200.10546875,
+          "kernel_delta_mb": 200.10546875,
+          "captured_fraction": 1.0,
+          "trial": 2
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 500,
+          "interval_ms": 50,
+          "polls": 12,
+          "actual_gap_ms_mean": 50.694699999997866,
+          "actual_gap_ms_max": 51.09200000015335,
+          "spike_alloc_s": 0.0347,
+          "spike_total_s": 0.5517,
+          "baseline_bytes": 11669504,
+          "polled_max_bytes": 221495296,
+          "kernel_peak_bytes": 221495296,
+          "polled_delta_mb": 200.10546875,
+          "kernel_delta_mb": 200.10546875,
+          "captured_fraction": 1.0,
+          "trial": 0
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 500,
+          "interval_ms": 50,
+          "polls": 13,
+          "actual_gap_ms_mean": 50.56094999999535,
+          "actual_gap_ms_max": 50.723199999993085,
+          "spike_alloc_s": 0.043,
+          "spike_total_s": 0.5563,
+          "baseline_bytes": 11706368,
+          "polled_max_bytes": 221532160,
+          "kernel_peak_bytes": 221532160,
+          "polled_delta_mb": 200.10546875,
+          "kernel_delta_mb": 200.10546875,
+          "captured_fraction": 1.0,
+          "trial": 1
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 500,
+          "interval_ms": 50,
+          "polls": 12,
+          "actual_gap_ms_mean": 50.46861818182565,
+          "actual_gap_ms_max": 50.78090000006341,
+          "spike_alloc_s": 0.0377,
+          "spike_total_s": 0.5494,
+          "baseline_bytes": 11710464,
+          "polled_max_bytes": 221540352,
+          "kernel_peak_bytes": 221540352,
+          "polled_delta_mb": 200.109375,
+          "kernel_delta_mb": 200.109375,
+          "captured_fraction": 1.0,
+          "trial": 2
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 500,
+          "interval_ms": 250,
+          "polls": 4,
+          "actual_gap_ms_mean": 250.5500000000514,
+          "actual_gap_ms_max": 250.55720000000292,
+          "spike_alloc_s": 0.0392,
+          "spike_total_s": 0.5509,
+          "baseline_bytes": 11661312,
+          "polled_max_bytes": 221487104,
+          "kernel_peak_bytes": 221487104,
+          "polled_delta_mb": 200.10546875,
+          "kernel_delta_mb": 200.10546875,
+          "captured_fraction": 1.0,
+          "trial": 0
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 500,
+          "interval_ms": 250,
+          "polls": 4,
+          "actual_gap_ms_mean": 250.4881333333439,
+          "actual_gap_ms_max": 250.581099999863,
+          "spike_alloc_s": 0.028,
+          "spike_total_s": 0.5403,
+          "baseline_bytes": 11653120,
+          "polled_max_bytes": 221478912,
+          "kernel_peak_bytes": 221478912,
+          "polled_delta_mb": 200.10546875,
+          "kernel_delta_mb": 200.10546875,
+          "captured_fraction": 1.0,
+          "trial": 1
+        },
+        {
+          "spike_mb": 200,
+          "hold_ms": 500,
+          "interval_ms": 250,
+          "polls": 4,
+          "actual_gap_ms_mean": 250.33093333331635,
+          "actual_gap_ms_max": 250.61310000000958,
+          "spike_alloc_s": 0.0261,
+          "spike_total_s": 0.535,
+          "baseline_bytes": 11673600,
+          "polled_max_bytes": 221499392,
+          "kernel_peak_bytes": 221499392,
+          "polled_delta_mb": 200.10546875,
+          "kernel_delta_mb": 200.10546875,
+          "captured_fraction": 1.0,
+          "trial": 2
+        }
+      ]
+    },
+    "memory_limit": {
+      "status": "ok",
+      "limit_mb": 256,
+      "try_mb": 512,
+      "step_mb": 16,
+      "wall_s": 0.060435200000029,
+      "exit_code": 0,
+      "child_lines": [
+        "ready",
+        "alloc 16",
+        "alloc 32",
+        "alloc 48",
+        "alloc 64",
+        "alloc 80",
+        "alloc 96",
+        "alloc 112",
+        "alloc 128",
+        "alloc 144",
+        "alloc 160",
+        "alloc 176",
+        "alloc 192",
+        "alloc 208",
+        "alloc 224",
+        "alloc 240",
+        "memoryerror 240"
+      ],
+      "job_accounting": {
+        "user_s": 0.03125,
+        "kernel_s": 0.09375,
+        "total_processes": 1,
+        "active_processes": 0,
+        "terminated_processes": 0,
+        "page_faults": 64573
+      },
+      "job_extended": {
+        "limit_flags": "0x2100",
+        "per_process_user_time_limit_s": 0.0,
+        "per_job_user_time_limit_s": 0.0,
+        "process_memory_limit": 268435456,
+        "peak_process_memory_used": 258080768,
+        "peak_job_memory_used": 258080768
+      },
+      "outcome": "ENFORCED_AS_ALLOCATION_FAILURE (MemoryError inside the child)"
+    },
+    "cpu_time_limit": {
+      "status": "ok",
+      "variants": {
+        "per_process_limit_set_before_assign": {
+          "mode": "before",
+          "limit_cpu_s": 1.0,
+          "child_wall_budget_s": 4.0,
+          "limits_readback": {
+            "limit_flags": "0x2002",
+            "per_process_user_time_limit_s": 1.0,
+            "per_job_user_time_limit_s": 0.0,
+            "process_memory_limit": 0,
+            "peak_process_memory_used": 5844992,
+            "peak_job_memory_used": 5844992
+          },
+          "wall_s": 4.007452700000158,
+          "exit_code": 0,
+          "child_finished_normally": true,
+          "job_accounting": {
+            "user_s": 3.921875,
+            "kernel_s": 0.0625,
+            "total_processes": 1,
+            "active_processes": 0,
+            "terminated_processes": 0,
+            "page_faults": 2997
+          },
+          "cpu_s_consumed": 3.984375,
+          "outcome": "NOT_ENFORCED (child ran to completion)"
+        },
+        "per_process_limit_set_after_assign": {
+          "mode": "after",
+          "limit_cpu_s": 1.0,
+          "child_wall_budget_s": 4.0,
+          "limits_readback": {
+            "limit_flags": "0x2002",
+            "per_process_user_time_limit_s": 1.0,
+            "per_job_user_time_limit_s": 0.0,
+            "process_memory_limit": 0,
+            "peak_process_memory_used": 5836800,
+            "peak_job_memory_used": 5836800
+          },
+          "wall_s": 1.1004111000002013,
+          "exit_code": 3221225540,
+          "child_finished_normally": false,
+          "job_accounting": {
+            "user_s": 1.0625,
+            "kernel_s": 0.046875,
+            "total_processes": 1,
+            "active_processes": 0,
+            "terminated_processes": 1,
+            "page_faults": 2915
+          },
+          "cpu_s_consumed": 1.109375,
+          "outcome": "ENFORCED (stopped before finishing its spin)"
+        },
+        "job_wide_time_limit": {
+          "mode": "job",
+          "limit_cpu_s": 1.0,
+          "child_wall_budget_s": 4.0,
+          "limits_readback": {
+            "limit_flags": "0x2004",
+            "per_process_user_time_limit_s": 0.0,
+            "per_job_user_time_limit_s": 1.0,
+            "process_memory_limit": 0,
+            "peak_process_memory_used": 5832704,
+            "peak_job_memory_used": 5832704
+          },
+          "wall_s": 4.007257400000071,
+          "exit_code": 0,
+          "child_finished_normally": true,
+          "job_accounting": {
+            "user_s": 3.96875,
+            "kernel_s": 0.03125,
+            "total_processes": 1,
+            "active_processes": 0,
+            "terminated_processes": 0,
+            "page_faults": 2993
+          },
+          "cpu_s_consumed": 4.0,
+          "outcome": "NOT_ENFORCED (child ran to completion)"
+        }
+      },
+      "outcome": "per_process_limit_set_before_assign: NOT_ENFORCED (child ran to completion); per_process_limit_set_after_assign: ENFORCED (stopped before finishing its spin); job_wide_time_limit: NOT_ENFORCED (child ran to completion)"
+    },
+    "supervisor_cpu_limit": {
+      "status": "ok",
+      "limit_cpu_s": 1.0,
+      "poll_ms": 20,
+      "wall_s_at_stop": 1.001420199999984,
+      "polls": 50,
+      "stopped_by_supervisor": true,
+      "exit_code": 1,
+      "child_finished_normally": false,
+      "cpu_s_final": 1.0,
+      "overshoot_s": 0.0,
+      "job_accounting": {
+        "user_s": 0.984375,
+        "kernel_s": 0.015625,
+        "total_processes": 1,
+        "active_processes": 0,
+        "terminated_processes": 0,
+        "page_faults": 2909
+      },
+      "outcome": "SUPERVISOR_STOPPED (overshoot_s shows the cost of polling and tick granularity)"
+    },
+    "cpu_rate_cap": {
+      "status": "ok",
+      "logical_cpus": 12,
+      "run_s": 5.0,
+      "trials": 3,
+      "control": {
+        "cpu_seconds": 5.0,
+        "wall_s": 5.024606799999901,
+        "core_equivalents_overall": 0.995102741173717,
+        "poll_ms": 100,
+        "windows_100ms": {
+          "n": 50,
+          "min": 0.7761144506794965,
+          "median": 0.9344597366994598,
+          "max": 1.4035075462567514
+        },
+        "windows_500ms": {
+          "n": 10,
+          "min": 0.9624371820359472,
+          "median": 0.9954729899636707,
+          "max": 1.0900147374976055
+        },
+        "note": "wall includes up to one poll interval after exit; window stats are noisy at 100 ms because accounting advances in 15.625 ms ticks"
+      },
+      "targets": {
+        "0.25": {
+          "trials": [
+            {
+              "cpu_seconds": 1.46875,
+              "wall_s": 5.435728000000154,
+              "core_equivalents_overall": 0.2702029976481455,
+              "poll_ms": 100,
+              "windows_100ms": {
+                "n": 54,
+                "min": 0.0,
+                "median": 0.0,
+                "max": 1.4040274245872224
+              },
+              "windows_500ms": {
+                "n": 10,
+                "min": 0.15450135367908385,
+                "median": 0.27967164590412963,
+                "max": 0.5286305299977339
+              },
+              "note": "wall includes up to one poll interval after exit; window stats are noisy at 100 ms because accounting advances in 15.625 ms ticks",
+              "cpu_rate_value_set": 208
+            },
+            {
+              "cpu_seconds": 1.4375,
+              "wall_s": 5.329653300000018,
+              "core_equivalents_overall": 0.2697173566618292,
+              "poll_ms": 100,
+              "windows_100ms": {
+                "n": 53,
+                "min": 0.0,
+                "median": 0.0,
+                "max": 1.399181335890476
+              },
+              "windows_500ms": {
+                "n": 10,
+                "min": 0.1243777381758793,
+                "median": 0.29535161129604703,
+                "max": 0.4041045282387441
+              },
+              "note": "wall includes up to one poll interval after exit; window stats are noisy at 100 ms because accounting advances in 15.625 ms ticks",
+              "cpu_rate_value_set": 208
+            },
+            {
+              "cpu_seconds": 1.40625,
+              "wall_s": 5.237709199999927,
+              "core_equivalents_overall": 0.26848569599855215,
+              "poll_ms": 100,
+              "windows_100ms": {
+                "n": 52,
+                "min": 0.0,
+                "median": 0.0,
+                "max": 1.401891519265654
+              },
+              "windows_500ms": {
+                "n": 10,
+                "min": 0.12292872474528231,
+                "median": 0.2949166601924464,
+                "max": 0.4350981710760848
+              },
+              "note": "wall includes up to one poll interval after exit; window stats are noisy at 100 ms because accounting advances in 15.625 ms ticks",
+              "cpu_rate_value_set": 208
+            }
+          ],
+          "mean_core_equivalents": 0.26946868343617564,
+          "deviation_pct_from_target": 7.787473374470255
+        },
+        "0.5": {
+          "trials": [
+            {
+              "cpu_seconds": 2.734375,
+              "wall_s": 5.330079000000069,
+              "core_equivalents_overall": 0.5130083437787629,
+              "poll_ms": 100,
+              "windows_100ms": {
+                "n": 53,
+                "min": 0.0,
+                "median": 0.6207928866074265,
+                "max": 1.3994347527518953
+              },
+              "windows_500ms": {
+                "n": 10,
+                "min": 0.40374355997973155,
+                "median": 0.5599183700149857,
+                "max": 0.7147034917703868
+              },
+              "note": "wall includes up to one poll interval after exit; window stats are noisy at 100 ms because accounting advances in 15.625 ms ticks",
+              "cpu_rate_value_set": 417
+            },
+            {
+              "cpu_seconds": 2.71875,
+              "wall_s": 5.25271029999999,
+              "core_equivalents_overall": 0.5175899382838618,
+              "poll_ms": 100,
+              "windows_100ms": {
+                "n": 52,
+                "min": 0.0,
+                "median": 0.6219531112441958,
+                "max": 1.402874683511381
+              },
+              "windows_500ms": {
+                "n": 10,
+                "min": 0.40349325339426656,
+                "median": 0.5591517933021397,
+                "max": 0.6845956713240848
+              },
+              "note": "wall includes up to one poll interval after exit; window stats are noisy at 100 ms because accounting advances in 15.625 ms ticks",
+              "cpu_rate_value_set": 417
+            },
+            {
+              "cpu_seconds": 2.75,
+              "wall_s": 5.026755800000046,
+              "core_equivalents_overall": 0.54707252737441,
+              "poll_ms": 100,
+              "windows_100ms": {
+                "n": 50,
+                "min": 0.0,
+                "median": 0.700228198166756,
+                "max": 1.5540212600049126
+              },
+              "windows_500ms": {
+                "n": 10,
+                "min": 0.40346600388001974,
+                "median": 0.5749795874976289,
+                "max": 0.7153641813296133
+              },
+              "note": "wall includes up to one poll interval after exit; window stats are noisy at 100 ms because accounting advances in 15.625 ms ticks",
+              "cpu_rate_value_set": 417
+            }
+          ],
+          "mean_core_equivalents": 0.5258902698123449,
+          "deviation_pct_from_target": 5.178053962468976
+        }
+      },
+      "outcome": "CAP_HELD_ON_AVERAGE_WITHIN_25PCT (single-thread child; short-window behavior not established)"
+    }
+  }
+}

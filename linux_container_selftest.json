@@ -1,0 +1,344 @@
+{
+  "meta": {
+    "version": "forge-m0-0.1",
+    "utc": "2026-11-22T02:44:40.867760+00:00",
+    "argv": [
+      "run_m0.py",
+      "--run-experiments",
+      "--spike-mb",
+      "100",
+      "--holds-ms",
+      "5",
+      "20",
+      "100",
+      "500",
+      "--intervals-ms",
+      "10",
+      "50",
+      "250",
+      "--out",
+      "evidence/linux_container_selftest.json"
+    ],
+    "is_windows": false,
+    "experiments_requested": true
+  },
+  "probes": {
+    "environment": {
+      "status": "ok",
+      "value": {
+        "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+        "implementation": "CPython",
+        "platform": "Linux-6.18.44-fc-v726-x86_64-with-glibc2.39",
+        "machine": "x86_64",
+        "pointer_bits": 64,
+        "cwd": "/mnt/user-data/outputs/forge_m0"
+      },
+      "method": "platform/sys; IsProcessInJob on Windows",
+      "note": "If the interpreter already runs inside a job, job-assignment tests may fail."
+    },
+    "clocks": {
+      "status": "ok",
+      "value": {
+        "perf_counter": {
+          "implementation": "clock_gettime(CLOCK_MONOTONIC)",
+          "resolution_s": 1e-09,
+          "monotonic": true,
+          "adjustable": false
+        },
+        "process_time": {
+          "implementation": "clock_gettime(CLOCK_PROCESS_CPUTIME_ID)",
+          "resolution_s": 1e-09,
+          "monotonic": true,
+          "adjustable": false
+        },
+        "monotonic": {
+          "implementation": "clock_gettime(CLOCK_MONOTONIC)",
+          "resolution_s": 1e-09,
+          "monotonic": true,
+          "adjustable": false
+        },
+        "time": {
+          "implementation": "clock_gettime(CLOCK_REALTIME)",
+          "resolution_s": 1e-09,
+          "monotonic": false,
+          "adjustable": true
+        },
+        "process_time_observed_granularity": {
+          "observed_changes": 20,
+          "min_s": 3.1699999999967865e-07,
+          "median_s": 3.574999999991779e-07,
+          "max_s": 2.0630000000035342e-06
+        }
+      },
+      "method": "time.get_clock_info + empirical process_time step sizes",
+      "note": "Reported resolution is nominal; the observed step size is what limits CPU-seconds accuracy."
+    },
+    "cpu_topology": {
+      "status": "ok",
+      "value": {
+        "os_cpu_count": 1,
+        "platform_processor": "x86_64"
+      },
+      "method": "os.cpu_count (POSIX self-test path)",
+      "note": "Registry MHz is nominal, not current frequency. Hybrid/efficiency-core data is not collected."
+    },
+    "system_memory": {
+      "status": "ok",
+      "value": {
+        "MemTotal": 4186202112,
+        "MemAvailable": 3957686272
+      },
+      "method": "/proc/meminfo (POSIX self-test path)"
+    },
+    "self_memory": {
+      "status": "ok",
+      "value": {
+        "VmHWM": 15831040,
+        "VmRSS": 15831040
+      },
+      "method": "/proc/self/status (POSIX self-test path)"
+    },
+    "power": {
+      "status": "unavailable",
+      "note": "power probes are Windows-only in M0"
+    },
+    "storage": {
+      "status": "ok",
+      "value": {
+        "path": "/",
+        "total": 270553174016,
+        "used": 7016349696,
+        "free": 10720559104
+      },
+      "method": "shutil.disk_usage",
+      "note": "Capacity only. Throughput/latency are not measured in M0."
+    },
+    "cpu_quantities_demo": {
+      "status": "ok",
+      "value": {
+        "stdlib_process_time": {
+          "cpu_seconds": 0.39879212999999997,
+          "wall_seconds": 0.40000958100000616,
+          "core_equivalents": 0.9969564454007261,
+          "normalized_pct": 99.69564454007262,
+          "logical_cpus": 1
+        }
+      },
+      "method": "time.process_time; GetProcessTimes; GetSystemTimes",
+      "note": "A single-threaded spin should show about 1 core-equivalent regardless of logical CPU count."
+    }
+  },
+  "experiments": {
+    "polling_miss": {
+      "status": "ok",
+      "reader_method": "/proc/<pid>/status (VmRSS, VmHWM) - POSIX self-test",
+      "is_windows_evidence": false,
+      "rows": [
+        {
+          "spike_mb": 100,
+          "hold_ms": 5.0,
+          "interval_ms": 10.0,
+          "polls": 8,
+          "actual_gap_ms_mean": 10.252114142858204,
+          "actual_gap_ms_max": 10.315759999997454,
+          "spike_alloc_s": 0.0632,
+          "spike_total_s": 0.0712,
+          "baseline_bytes": 9703424,
+          "polled_max_bytes": 113348608,
+          "kernel_peak_bytes": 114520064,
+          "polled_delta_mb": 98.84375,
+          "kernel_delta_mb": 99.9609375,
+          "captured_fraction": 0.9888237592809691
+        },
+        {
+          "spike_mb": 100,
+          "hold_ms": 5.0,
+          "interval_ms": 50.0,
+          "polls": 3,
+          "actual_gap_ms_mean": 50.27544549999874,
+          "actual_gap_ms_max": 50.36105300000315,
+          "spike_alloc_s": 0.0432,
+          "spike_total_s": 0.0504,
+          "baseline_bytes": 9687040,
+          "polled_max_bytes": 9711616,
+          "kernel_peak_bytes": 114511872,
+          "polled_delta_mb": 0.0234375,
+          "kernel_delta_mb": 99.96875,
+          "captured_fraction": 0.00023444826508283839
+        },
+        {
+          "spike_mb": 100,
+          "hold_ms": 5.0,
+          "interval_ms": 250.0,
+          "polls": 2,
+          "actual_gap_ms_mean": 250.18654500000537,
+          "actual_gap_ms_max": 250.18654500000537,
+          "spike_alloc_s": 0.0449,
+          "spike_total_s": 0.0524,
+          "baseline_bytes": 9687040,
+          "polled_max_bytes": 9711616,
+          "kernel_peak_bytes": 114511872,
+          "polled_delta_mb": 0.0234375,
+          "kernel_delta_mb": 99.96875,
+          "captured_fraction": 0.00023444826508283839
+        },
+        {
+          "spike_mb": 100,
+          "hold_ms": 20.0,
+          "interval_ms": 10.0,
+          "polls": 8,
+          "actual_gap_ms_mean": 10.385295285713271,
+          "actual_gap_ms_max": 11.340946999993662,
+          "spike_alloc_s": 0.0395,
+          "spike_total_s": 0.0623,
+          "baseline_bytes": 9777152,
+          "polled_max_bytes": 114663424,
+          "kernel_peak_bytes": 114475008,
+          "polled_delta_mb": 100.02734375,
+          "kernel_delta_mb": 99.84765625,
+          "captured_fraction": 1.0017996166034193
+        },
+        {
+          "spike_mb": 100,
+          "hold_ms": 20.0,
+          "interval_ms": 50.0,
+          "polls": 3,
+          "actual_gap_ms_mean": 50.325868000001606,
+          "actual_gap_ms_max": 50.45122500000332,
+          "spike_alloc_s": 0.0445,
+          "spike_total_s": 0.0672,
+          "baseline_bytes": 9707520,
+          "polled_max_bytes": 114593792,
+          "kernel_peak_bytes": 114532352,
+          "polled_delta_mb": 100.02734375,
+          "kernel_delta_mb": 99.96875,
+          "captured_fraction": 1.0005861206627071
+        },
+        {
+          "spike_mb": 100,
+          "hold_ms": 20.0,
+          "interval_ms": 250.0,
+          "polls": 2,
+          "actual_gap_ms_mean": 250.29730100000336,
+          "actual_gap_ms_max": 250.29730100000336,
+          "spike_alloc_s": 0.0452,
+          "spike_total_s": 0.0676,
+          "baseline_bytes": 9719808,
+          "polled_max_bytes": 9744384,
+          "kernel_peak_bytes": 114409472,
+          "polled_delta_mb": 0.0234375,
+          "kernel_delta_mb": 99.83984375,
+          "captured_fraction": 0.00023475096834774442
+        },
+        {
+          "spike_mb": 100,
+          "hold_ms": 100.0,
+          "interval_ms": 10.0,
+          "polls": 16,
+          "actual_gap_ms_mean": 10.321378533332867,
+          "actual_gap_ms_max": 11.164832999995156,
+          "spike_alloc_s": 0.0436,
+          "spike_total_s": 0.1465,
+          "baseline_bytes": 9768960,
+          "polled_max_bytes": 114655232,
+          "kernel_peak_bytes": 114466816,
+          "polled_delta_mb": 100.02734375,
+          "kernel_delta_mb": 99.84765625,
+          "captured_fraction": 1.0017996166034193
+        },
+        {
+          "spike_mb": 100,
+          "hold_ms": 100.0,
+          "interval_ms": 50.0,
+          "polls": 4,
+          "actual_gap_ms_mean": 50.32209199999708,
+          "actual_gap_ms_max": 50.400021000001516,
+          "spike_alloc_s": 0.045,
+          "spike_total_s": 0.1476,
+          "baseline_bytes": 9740288,
+          "polled_max_bytes": 114626560,
+          "kernel_peak_bytes": 114438144,
+          "polled_delta_mb": 100.02734375,
+          "kernel_delta_mb": 99.84765625,
+          "captured_fraction": 1.0017996166034193
+        },
+        {
+          "spike_mb": 100,
+          "hold_ms": 100.0,
+          "interval_ms": 250.0,
+          "polls": 2,
+          "actual_gap_ms_mean": 250.4247709999987,
+          "actual_gap_ms_max": 250.4247709999987,
+          "spike_alloc_s": 0.0446,
+          "spike_total_s": 0.1474,
+          "baseline_bytes": 9736192,
+          "polled_max_bytes": 9760768,
+          "kernel_peak_bytes": 114429952,
+          "polled_delta_mb": 0.0234375,
+          "kernel_delta_mb": 99.84375,
+          "captured_fraction": 0.00023474178403755868
+        },
+        {
+          "spike_mb": 100,
+          "hold_ms": 500.0,
+          "interval_ms": 10.0,
+          "polls": 57,
+          "actual_gap_ms_mean": 10.322519017857143,
+          "actual_gap_ms_max": 10.523289999994745,
+          "spike_alloc_s": 0.0642,
+          "spike_total_s": 0.569,
+          "baseline_bytes": 9805824,
+          "polled_max_bytes": 114692096,
+          "kernel_peak_bytes": 114626560,
+          "polled_delta_mb": 100.02734375,
+          "kernel_delta_mb": 99.96484375,
+          "captured_fraction": 1.0006252198038372
+        },
+        {
+          "spike_mb": 100,
+          "hold_ms": 500.0,
+          "interval_ms": 50.0,
+          "polls": 13,
+          "actual_gap_ms_mean": 50.54468033333374,
+          "actual_gap_ms_max": 50.675282000000266,
+          "spike_alloc_s": 0.0582,
+          "spike_total_s": 0.5628,
+          "baseline_bytes": 9777152,
+          "polled_max_bytes": 114663424,
+          "kernel_peak_bytes": 114475008,
+          "polled_delta_mb": 100.02734375,
+          "kernel_delta_mb": 99.84765625,
+          "captured_fraction": 1.0017996166034193
+        },
+        {
+          "spike_mb": 100,
+          "hold_ms": 500.0,
+          "interval_ms": 250.0,
+          "polls": 4,
+          "actual_gap_ms_mean": 250.50172566666618,
+          "actual_gap_ms_max": 250.7358160000024,
+          "spike_alloc_s": 0.0519,
+          "spike_total_s": 0.5546,
+          "baseline_bytes": 9732096,
+          "polled_max_bytes": 114618368,
+          "kernel_peak_bytes": 114421760,
+          "polled_delta_mb": 100.02734375,
+          "kernel_delta_mb": 99.83984375,
+          "captured_fraction": 1.001878007746782
+        }
+      ]
+    },
+    "memory_limit": {
+      "status": "skipped",
+      "note": "memory_limit_test requires Windows Job Objects"
+    },
+    "cpu_time_limit": {
+      "status": "skipped",
+      "note": "cpu_time_limit_test requires Windows Job Objects"
+    },
+    "cpu_rate_cap": {
+      "status": "skipped",
+      "note": "cpu_rate_cap_test requires Windows Job Objects"
+    }
+  }
+}
